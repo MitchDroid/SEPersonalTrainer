@@ -34,7 +34,7 @@ public class FactsConnectionHandler {
         try {
 
             Class.forName("com.mysql.jdbc.Driver");
-            mConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_agent", ROOT_NAME, ROOT_PASSWORD);
+            mConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_expert_system", ROOT_NAME, ROOT_PASSWORD);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
 
