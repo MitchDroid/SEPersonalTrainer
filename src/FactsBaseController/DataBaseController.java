@@ -6,28 +6,27 @@
  */
 package FactsBaseController;
 
-import FactsBaseHandler.FactsConnectionHandler;
+import FactsBaseHandler.ConnectionHandler;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author miller.barrera
  *
  */
-public class FactsBaseController {
+public class DataBaseController {
 
-    private FactsConnectionHandler mConnectionHandler;
+    private ConnectionHandler mConnectionHandler;
     private Connection mConnection = null;
-    private static FactsBaseController mController;
+    private static DataBaseController mController;
 
-    public static FactsBaseController getInstance() {
+    public static DataBaseController getInstance() {
         if (mController == null) {
-            mController = new FactsBaseController();
+            mController = new DataBaseController();
         }
         return mController;
     }
@@ -35,8 +34,8 @@ public class FactsBaseController {
     /**
      * Esta clase es la interfaz entre la base de datos y las vistas
      */
-    public FactsBaseController() {
-        mConnectionHandler = new FactsConnectionHandler();
+    public DataBaseController() {
+        mConnectionHandler = new ConnectionHandler();
         mConnection = mConnectionHandler.createConnection();
 
     }
@@ -74,20 +73,29 @@ public class FactsBaseController {
     }
 
     /**
-     * Método para insertar nuevos registros de usuarios en la base de datos.
+     * Método para insertar la base de hechos en la base de datos.
      *
      * @return 1 si el registro fué insertado correctamente
      */
-    public int sqlItemInsert(String itemName, String itemPrice) {
+    public int sqlInsertFacts(String name, String birth_Date, String age,
+            String address, String sex, String weight, String height, String diseases) {
 
         int queryResult = 0;
         if (mConnection != null) {
             try {
-                String SQL_INSERT_QUERY = "INSERT INTO tb_saved_items (item_name,item_price) VALUES (?,?)";
+                String SQL_INSERT_QUERY = "INSERT INTO tb_base_facts (nombre, fecha_nacimiento, edad,"
+                        + "direccion, sexo, peso_kg, estatura_cm, enfermedades) VALUES (?,?,?,?,?,?,?,?)";
                 PreparedStatement pst = mConnection.prepareStatement(SQL_INSERT_QUERY);
 
-                pst.setString(1, itemName);
-                pst.setString(2, itemPrice);
+                pst.setString(1, name);
+                pst.setString(2, birth_Date);
+                pst.setString(3, age);
+                pst.setString(4, address);
+                pst.setString(5, sex);
+                pst.setString(6, weight);
+                pst.setString(7, height);
+                pst.setString(8, diseases);
+                
 
                 /**
                  * Execute QUERY*

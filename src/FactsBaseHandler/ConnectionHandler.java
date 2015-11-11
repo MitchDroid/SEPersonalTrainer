@@ -13,14 +13,14 @@ import java.sql.SQLException;
  *
  * @author miller.barrera
  */
-public class FactsConnectionHandler {
+public class ConnectionHandler {
 
     private Connection mConnection = null;
     public static final String ROOT_NAME = "root";
     public static final String ROOT_PASSWORD = "123456789";
 
 
-    public FactsConnectionHandler() {
+    public ConnectionHandler() {
     }
 
 
@@ -34,7 +34,7 @@ public class FactsConnectionHandler {
         try {
 
             Class.forName("com.mysql.jdbc.Driver");
-            mConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_expert_system", ROOT_NAME, ROOT_PASSWORD);
+            mConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/db_expert_systems", ROOT_NAME, ROOT_PASSWORD);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
 
