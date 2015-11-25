@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 
 /**
@@ -41,22 +42,23 @@ public class DataBaseController {
     }
 
     /**
-     * Método para recuperar el formato de URL según los criterios de búsqueda.
+     * Método para recuperar datos de la base de hechos.
      *
-     * @param id identificación de la URL solicitada
-     * @return String con la URL Formateada
+     * @return Vector con la los datos
      */
-    public String getURLTypeToSearch(int id) {
+    public Vector<String> getFacts() {
         String URL = "";
+        Vector<String> factsData = new Vector<>();
 
         if (mConnection != null) {
             try {
-                String SQL_INSERT_QUERY = "SELECT * FROM tb_url_store WHERE url_id = " + id;
+                String SQL_INSERT_QUERY = "SELECT * FROM tb_base_facts";
                 PreparedStatement pst = mConnection.prepareStatement(SQL_INSERT_QUERY);
                 ResultSet rs = pst.executeQuery();
 
                 while (rs.next() == true) {
-                    URL = rs.getString("url");
+                    factsData.add(rs.getString(7));
+                    factsData.add(rs.getString(8));
 
                 }
 
@@ -69,7 +71,7 @@ public class DataBaseController {
 
         }
 
-        return URL;
+        return factsData;
     }
 
     /**
@@ -95,13 +97,11 @@ public class DataBaseController {
                 pst.setString(6, weight);
                 pst.setString(7, height);
                 pst.setString(8, diseases);
-                
 
                 /**
                  * Execute QUERY*
                  */
                 queryResult = pst.executeUpdate();
-                
 
                 if (pst != null) {
                     pst.close();
@@ -113,6 +113,107 @@ public class DataBaseController {
             }
         }
         return queryResult;
+    }
+
+    /**
+     * Método para recuperar el id de la base de conocimientos.
+     *
+     * @return Vector con el id de la rutina sugerida
+     */
+    public Vector<String> getSuggestedRoutineId(String routineId) {
+        String URL = "";
+        Vector<String> suggestedRoutineData = new Vector<>();
+
+        if (mConnection != null) {
+            try {
+                String SQL_INSERT_QUERY = "SELECT * FROM tb_routines where id_routine = " + "'" + routineId + "'";
+                PreparedStatement pst = mConnection.prepareStatement(SQL_INSERT_QUERY);
+                ResultSet rs = pst.executeQuery();
+
+                while (rs.next() == true) {
+                    suggestedRoutineData.add(rs.getString(1));
+                    suggestedRoutineData.add(rs.getString(2));
+                    suggestedRoutineData.add(rs.getString(3));
+
+                }
+
+                pst.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+            }
+
+        }
+
+        return suggestedRoutineData;
+    }
+
+    /**
+     * Método para recuperar la rutina sugerida de la base de conocimientos.
+     *
+     * @return Vector con el id de la rutina sugerida
+     */
+    public Vector<Vector<String>> getSuggestedRoutine(String id) {
+        String s_tb_name = "";
+
+        if (id.equalsIgnoreCase("PI")) {
+            s_tb_name = routineTBNameQuery(1);
+        } else if (id.equalsIgnoreCase("BP")) {
+            s_tb_name = routineTBNameQuery(2);
+        } else if (id.equalsIgnoreCase("GM")) {
+            s_tb_name = routineTBNameQuery(3);
+        } else {
+            s_tb_name = routineTBNameQuery(1);
+        }
+        Vector<Vector<String>> suggestedRoutine = new Vector<Vector<String>>();
+
+        if (mConnection != null) {
+            try {
+                String SQL_INSERT_QUERY = "SELECT * FROM " + s_tb_name;
+                PreparedStatement pst = mConnection.prepareStatement(SQL_INSERT_QUERY);
+                ResultSet rs = pst.executeQuery();
+
+                while (rs.next() == true) {
+                    Vector<String> singlevector = new Vector<String>();
+                    singlevector.add(rs.getString(1));
+                    singlevector.add(rs.getString(2));
+                    singlevector.add(rs.getString(3));
+                    singlevector.add(rs.getString(4));
+                    suggestedRoutine.add(singlevector);
+
+                }
+
+                pst.close();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+            }
+
+        }
+
+        return suggestedRoutine;
+    }
+
+    public String routineTBNameQuery(int id) {
+        String tb_name = "";
+        switch (id) {
+            case 1:
+                tb_name = "tb_bk_goal_weight_maintenance";
+                break;
+            case 2:
+                tb_name = "tb_bk_loose_weight";
+                break;
+            case 3:
+                tb_name = "tb_bk_goal_weight_gain_muscle";
+                break;
+            default:
+                tb_name = "tb_bk_goal_weight_maintenance";
+        }
+
+        return tb_name;
+
     }
 
 }
