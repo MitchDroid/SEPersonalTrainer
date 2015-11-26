@@ -7,6 +7,7 @@
 package FactsBaseController;
 
 import FactsBaseHandler.ConnectionHandler;
+import com.mysql.jdbc.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -126,7 +127,7 @@ public class DataBaseController {
 
         if (mConnection != null) {
             try {
-                String SQL_INSERT_QUERY = "SELECT * FROM tb_routines where id_routine = " + "'" + routineId + "'";
+                String SQL_INSERT_QUERY = "SELECT * FROM tb_knowledge where id_routine = " + "'" + routineId + "'";
                 PreparedStatement pst = mConnection.prepareStatement(SQL_INSERT_QUERY);
                 ResultSet rs = pst.executeQuery();
 
@@ -134,7 +135,6 @@ public class DataBaseController {
                     suggestedRoutineData.add(rs.getString(1));
                     suggestedRoutineData.add(rs.getString(2));
                     suggestedRoutineData.add(rs.getString(3));
-
                 }
 
                 pst.close();
@@ -214,6 +214,25 @@ public class DataBaseController {
 
         return tb_name;
 
+    }
+
+    public void trucateTable() {
+        if (mConnection != null) {
+            try {
+                String SQL_INSERT_QUERY = "TRUNCATE TABLE tb_base_facts";
+                java.sql.Statement pst = mConnection.createStatement();
+                pst.executeUpdate(SQL_INSERT_QUERY);
+
+                pst.close();
+
+                System.out.println("Succesfully truncate table");
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+
+            }
+
+        }
     }
 
 }

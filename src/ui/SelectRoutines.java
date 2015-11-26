@@ -91,7 +91,7 @@ public class SelectRoutines extends javax.swing.JFrame implements KnowledgeInter
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 153, 0));
-        jLabel7.setText("adecuada para ti");
+        jLabel7.setText("rutina adecuada para ti");
 
         jButton2.setBackground(new java.awt.Color(255, 153, 0));
         jButton2.setFont(new java.awt.Font("Calibri", 3, 24)); // NOI18N
@@ -106,15 +106,6 @@ public class SelectRoutines extends javax.swing.JFrame implements KnowledgeInter
         panelRoutines.setLayout(panelRoutinesLayout);
         panelRoutinesLayout.setHorizontalGroup(
             panelRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoutinesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoutinesLayout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(49, 49, 49))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoutinesLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(95, 95, 95))))
             .addGroup(panelRoutinesLayout.createSequentialGroup()
                 .addGroup(panelRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelRoutinesLayout.createSequentialGroup()
@@ -128,6 +119,14 @@ public class SelectRoutines extends javax.swing.JFrame implements KnowledgeInter
                         .addGap(26, 26, 26)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 10, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelRoutinesLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addGroup(panelRoutinesLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel7)))
+                .addGap(49, 49, 49))
         );
         panelRoutinesLayout.setVerticalGroup(
             panelRoutinesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

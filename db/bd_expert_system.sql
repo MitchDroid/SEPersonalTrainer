@@ -25,14 +25,15 @@ DROP TABLE IF EXISTS `tb_base_facts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tb_base_facts` (
-  `id_usuario` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL AUTO_INCREMENT,
   `nombre` varchar(45) DEFAULT NULL,
-  `apellido` varchar(45) DEFAULT NULL,
+  `fecha_nacimiento` varchar(45) DEFAULT NULL,
+  `edad` varchar(45) DEFAULT NULL,
   `direccion` varchar(45) DEFAULT NULL,
-  `peso_kg` varchar(45) DEFAULT NULL,
-  `altura_cm` varchar(45) DEFAULT NULL,
-  `efermedades` varchar(45) DEFAULT NULL,
   `sexo` varchar(45) DEFAULT NULL,
+  `peso_kg` varchar(45) DEFAULT NULL,
+  `estatura_cm` varchar(45) DEFAULT NULL,
+  `enfermedades` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_usuario`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Todos los datos ingresados por el usuario para su respectiva validación ante la base de conocimientos';
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -119,6 +120,30 @@ LOCK TABLES `tb_bk_loose_weight` WRITE;
 INSERT INTO `tb_bk_loose_weight` VALUES ('Quadriceps/Gluteos','Leg Press (Prensa)','4','7'),('Biceps Femoral','Maquina de Biceps Femoral','4','7'),('Espalda Superior','Remo con Cable Sentado','4','7'),('Pecho','Pecho en Banco Plano','4','7'),('Hombros','Hombro con Mancuernas','4','7'),('Trapecios','Encogimiento con Mancuerna','4','7'),('Triceps','Triceps con Cable (Pushdown)','4','7'),('Biceps','Biceps con Barra','4','7'),('Espalda Baja','Extensiones de Espalda','4','7'),('Pantorillas','Pantorrillas Parado','4','7'),('Ante Brazo','Encogimiento de muñeca con Barra','4','7'),('Abdominales','Encogimientos','4','7');
 /*!40000 ALTER TABLE `tb_bk_loose_weight` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `tb_routines`
+--
+
+DROP TABLE IF EXISTS `tb_routines`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tb_routines` (
+  `id_routine` varchar(3) DEFAULT NULL,
+  `name_routine` varchar(45) DEFAULT NULL,
+  `explain_mode` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `tb_routines`
+--
+
+LOCK TABLES `tb_routines` WRITE;
+/*!40000 ALTER TABLE `tb_routines` DISABLE KEYS */;
+INSERT INTO `tb_routines` VALUES ('PI','Mantener Peso','Nuestro Sistemas sugiere esta Rutina según datos validados en nuestro motor de inferencia'),('BP','Bajar de Peso','Nuestro Sistemas sugiere esta Rutina según datos validados en nuestro motor de inferencia'),('GM','Ganar músculo','Nuestro Sistemas sugiere esta Rutina según datos validados en nuestro motor de inferencia');
+/*!40000 ALTER TABLE `tb_routines` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -129,4 +154,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-06 17:12:47
+-- Dump completed on 2015-11-25 16:31:20
